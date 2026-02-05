@@ -68,15 +68,6 @@ function XLogo({ className }: { className?: string }) {
   );
 }
 
-/* ─── Story data ─── */
-const stories = [
-  { label: "Create story", isCreate: true },
-  { label: "Elon Musk", color: "from-blue-600 to-purple-600" },
-  { label: "Naval", color: "from-pink-500 to-orange-500" },
-  { label: "Paul G.", color: "from-green-500 to-teal-500" },
-  { label: "Sam A.", color: "from-yellow-500 to-red-500" },
-];
-
 /* ─── Main Component ─── */
 export default function FacebookLayout({ children }: { children: ReactNode }) {
   const { setView } = useView();
@@ -171,48 +162,6 @@ export default function FacebookLayout({ children }: { children: ReactNode }) {
       {/* ══════════ MAIN CONTENT ══════════ */}
       <main className="pt-14 min-h-screen">
         <div className="max-w-[680px] mx-auto px-4 py-6">
-          {/* Stories row */}
-          <div className="flex gap-2 mb-4 overflow-x-auto pb-2 scrollbar-none">
-            {stories.map((story, i) => (
-              <div key={i} className="shrink-0 w-[112px] cursor-pointer group">
-                <div className={`relative h-[200px] w-full rounded-xl overflow-hidden ${
-                  story.isCreate
-                    ? "bg-[rgb(36,37,38)] border border-[rgb(58,59,60)]"
-                    : `bg-gradient-to-br ${story.color}`
-                }`}>
-                  {story.isCreate ? (
-                    <>
-                      <div className="absolute inset-0 flex items-center justify-center pb-6">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
-                          S
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 inset-x-0 bg-[rgb(36,37,38)] border-t border-[rgb(58,59,60)] pt-6 pb-3 flex flex-col items-center">
-                        <div className="absolute -top-4 w-8 h-8 rounded-full bg-[rgb(66,133,244)] flex items-center justify-center border-[3px] border-[rgb(36,37,38)]">
-                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                          </svg>
-                        </div>
-                        <span className="text-white text-xs font-medium mt-1">Create story</span>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="absolute top-3 left-3">
-                        <div className="w-10 h-10 rounded-full border-[3px] border-[rgb(66,133,244)] bg-[rgb(58,59,60)] flex items-center justify-center text-white text-xs font-bold">
-                          {story.label.charAt(0)}
-                        </div>
-                      </div>
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <span className="text-white text-xs font-medium drop-shadow-lg">{story.label}</span>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
           {/* Create post box */}
           <div className="bg-[rgb(36,37,38)] rounded-lg p-3 mb-4 shadow-sm">
             <div className="flex items-center gap-3">
