@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ViewProvider } from "../contexts/ViewContext";
 
 export const metadata: Metadata = {
   title: "Tweet Feed",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-black">{children}</body>
+      <body className="min-h-screen bg-black">
+        <ViewProvider>{children}</ViewProvider>
+      </body>
     </html>
   );
 }

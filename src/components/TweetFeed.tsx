@@ -6,7 +6,12 @@ import { fetchTweets, fetchAllTags } from "../lib/supabase";
 import TweetCard from "./TweetCard";
 import SearchBar from "./SearchBar";
 
-export default function TweetFeed() {
+interface TweetFeedProps {
+  cardComponent?: React.ComponentType<{ tweet: Tweet }>;
+}
+
+export default function TweetFeed({ cardComponent }: TweetFeedProps) {
+  const CardComponent = cardComponent || TweetCard;
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -123,7 +128,7 @@ export default function TweetFeed() {
 
       {!initialLoading &&
         tweets.map((tweet) => (
-          <TweetCard key={tweet.id} tweet={tweet} />
+          <CardComponent key={tweet.id} tweet={tweet} />
         ))}
 
       {/* Load more trigger for infinite scroll */}
