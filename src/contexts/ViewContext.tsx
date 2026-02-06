@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-export type ViewMode = "twitter" | "facebook";
+export type ViewMode = "digest" | "twitter" | "facebook";
 
 interface ViewContextType {
   view: ViewMode;
@@ -10,12 +10,12 @@ interface ViewContextType {
 }
 
 const ViewContext = createContext<ViewContextType>({
-  view: "twitter",
+  view: "digest",
   setView: () => {},
 });
 
 export function ViewProvider({ children }: { children: ReactNode }) {
-  const [view, setView] = useState<ViewMode>("twitter");
+  const [view, setView] = useState<ViewMode>("digest");
 
   return (
     <ViewContext.Provider value={{ view, setView }}>

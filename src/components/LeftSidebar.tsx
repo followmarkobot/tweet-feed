@@ -9,6 +9,7 @@ interface LeftSidebarProps {
 }
 
 const navItems: { id: ViewMode; label: string }[] = [
+  { id: "digest", label: "Digest" },
   { id: "twitter", label: "Twitter" },
   { id: "facebook", label: "Facebook" },
 ];
@@ -25,6 +26,14 @@ function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+function DigestIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 9v.906a2.25 2.25 0 0 1-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 0 0 1.183 1.981l6.478 3.488m8.839 2.51-4.66-2.51m0 0-1.023-.55a2.25 2.25 0 0 0-2.134 0l-1.022.55m0 0-4.661 2.51m16.5 1.615a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V8.844a2.25 2.25 0 0 1 1.183-1.981l7.5-4.039a2.25 2.25 0 0 1 2.134 0l7.5 4.039a2.25 2.25 0 0 1 1.183 1.98V19.5Z" />
     </svg>
   );
 }
@@ -87,7 +96,13 @@ export default function LeftSidebar({ onShowOnboarding }: LeftSidebarProps) {
                 }`}
               >
                 <div className="relative shrink-0 w-7 h-7 flex items-center justify-center">
-                  {item.id === "twitter" ? (
+                  {item.id === "digest" ? (
+                    <DigestIcon
+                      className={`w-6 h-6 ${
+                        isActive ? "text-[rgb(29,155,240)]" : "text-current"
+                      }`}
+                    />
+                  ) : item.id === "twitter" ? (
                     <XIcon
                       className={`w-6 h-6 ${
                         isActive ? "text-[rgb(29,155,240)]" : "text-current"
@@ -181,7 +196,9 @@ export default function LeftSidebar({ onShowOnboarding }: LeftSidebarProps) {
                   : "text-[rgb(113,118,123)]"
               }`}
             >
-              {item.id === "twitter" ? (
+              {item.id === "digest" ? (
+                <DigestIcon className="w-6 h-6" />
+              ) : item.id === "twitter" ? (
                 <XIcon className="w-6 h-6" />
               ) : (
                 <FacebookIcon className="w-6 h-6" />

@@ -7,6 +7,7 @@ import LeftSidebar from "../components/LeftSidebar";
 import TweetCard from "../components/TweetCard";
 import FacebookCard from "../components/FacebookCard";
 import FacebookLayout from "../components/FacebookLayout";
+import SubstackLayout from "../components/SubstackLayout";
 import UpgradeBanner from "../components/UpgradeBanner";
 import PricingModal from "../components/PricingModal";
 import OnboardingModal from "../components/OnboardingModal";
@@ -44,6 +45,7 @@ function HomeContent() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
 
+  const isDigest = view === "digest";
   const isFacebook = view === "facebook";
 
   // Check for first visit and show onboarding
@@ -80,7 +82,12 @@ function HomeContent() {
         {/* Left sidebar always visible */}
         <LeftSidebar onShowOnboarding={() => setShowOnboarding(true)} />
 
-        {isFacebook ? (
+        {isDigest ? (
+          /* ─── Digest view: Substack-style newsletter layout ─── */
+          <div className="md:ml-[68px] lg:ml-[240px] transition-all duration-200 pb-16 md:pb-0">
+            <SubstackLayout />
+          </div>
+        ) : isFacebook ? (
           /* ─── Facebook view: full immersive layout, offset for sidebar ─── */
           <div className="md:ml-[68px] lg:ml-[240px] transition-all duration-200 pb-16 md:pb-0">
             <FacebookLayout>
