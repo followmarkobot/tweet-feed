@@ -190,6 +190,24 @@ export default function LeftSidebar({ onShowOnboarding }: LeftSidebarProps) {
             </button>
           );
         })}
+        {/* Mobile Go Pro button */}
+        <button
+          onClick={handleDirectCheckout}
+          disabled={checkoutLoading}
+          className="flex-1 flex flex-col items-center gap-1 py-3 transition-colors text-white disabled:opacity-50"
+        >
+          {checkoutLoading ? (
+            <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6 text-[rgb(29,155,240)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
+            </svg>
+          )}
+          <span className="text-[10px] font-medium bg-gradient-to-r from-[rgb(29,155,240)] to-[rgb(120,86,255)] bg-clip-text text-transparent">Pro</span>
+        </button>
       </nav>
     </>
   );
