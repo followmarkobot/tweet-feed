@@ -115,8 +115,11 @@ export default function TweetCard({ tweet }: TweetCardProps) {
           )}
 
           {/* Quote tweet */}
-          {tweet.quoted_tweet_id && (
-            <QuoteTweet quotedTweetId={tweet.quoted_tweet_id} />
+          {(tweet.quoted_tweet || tweet.quoted_tweet_id) && (
+            <QuoteTweet 
+              quotedTweet={tweet.quoted_tweet} 
+              quotedTweetId={tweet.quoted_tweet_id || undefined} 
+            />
           )}
 
           {/* Tags */}

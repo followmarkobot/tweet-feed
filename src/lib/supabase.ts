@@ -15,6 +15,17 @@ function getSupabase(): SupabaseClient {
   return _supabase;
 }
 
+export interface QuotedTweetData {
+  tweet_id: string;
+  tweet_text: string;
+  author_handle: string;
+  author_display_name: string;
+  author_avatar_url: string;
+  timestamp: string | null;
+  source_url: string;
+  media: MediaItem[];
+}
+
 export interface Tweet {
   id: number;
   tweet_id: string;
@@ -27,6 +38,7 @@ export interface Tweet {
   media: MediaItem[];
   link_cards: LinkCardData[];
   quoted_tweet_id: string | null;
+  quoted_tweet: QuotedTweetData | null;
   in_reply_to_tweet_id: string | null;
   conversation_id: string | null;
   raw_json: Record<string, unknown> | null;
