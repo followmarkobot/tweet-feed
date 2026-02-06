@@ -3,8 +3,11 @@ import "./globals.css";
 import { ViewProvider } from "../contexts/ViewContext";
 
 export const metadata: Metadata = {
-  title: "Tweet Feed",
-  description: "Saved tweets feed viewer",
+  title: "Stashy",
+  description: "Your personal tweet stash 🐿️",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
