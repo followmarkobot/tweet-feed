@@ -9,6 +9,7 @@ import FacebookCard from "../components/FacebookCard";
 import FacebookLayout from "../components/FacebookLayout";
 import UpgradeBanner from "../components/UpgradeBanner";
 import PricingModal from "../components/PricingModal";
+import OnboardingModal from "../components/OnboardingModal";
 import { useView } from "../contexts/ViewContext";
 
 export const dynamic = "force-dynamic";
@@ -36,25 +37,22 @@ function SuccessToast({ onDismiss }: { onDismiss: () => void }) {
   );
 }
 
-function GoProButton({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-bold transition-all hover:scale-105 bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/20"
-    >
-      <span>Go Pro</span>
-      <span>✨</span>
-    </button>
-  );
-}
-
 function HomeContent() {
   const { view } = useView();
   const searchParams = useSearchParams();
   const [showPricing, setShowPricing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const isFacebook = view === "facebook";
+
+  // Check for first visit and show onboarding
+  useEffect(() => {
+    const hasSeenOnboarding = localStorage.getItem("hasSeenOnboarding");
+    if (!hasSeenOnboarding) {
+      setShowOnboarding(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (searchParams.get("upgraded") === "true") {
@@ -67,19 +65,25 @@ function HomeContent() {
     }
   }, [searchParams]);
 
+  const handleOnboardingClose = () => {
+    localStorage.setItem("hasSeenOnboarding", "true");
+    setShowOnboarding(false);
+  };
+
   return (
     <>
       {showSuccess && <SuccessToast onDismiss={() => setShowSuccess(false)} />}
       <PricingModal isOpen={showPricing} onClose={() => setShowPricing(false)} />
+      <OnboardingModal isOpen={showOnboarding} onClose={handleOnboardingClose} />
 
       <main className="min-h-screen">
         {/* Left sidebar always visible */}
-        <LeftSidebar />
+        <LeftSidebar onShowOnboarding={() => setShowOnboarding(true)} />
 
         {isFacebook ? (
           /* ─── Facebook view: full immersive layout, offset for sidebar ─── */
           <div className="md:ml-[68px] lg:ml-[240px] transition-all duration-200 pb-16 md:pb-0">
-            <FacebookLayout goProButton={<GoProButton onClick={() => setShowPricing(true)} />}>
+            <FacebookLayout>
               <TweetFeed cardComponent={FacebookCard} />
               <UpgradeBanner onLearnMore={() => setShowPricing(true)} />
             </FacebookLayout>
@@ -98,8 +102,7 @@ function HomeContent() {
                   >
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
-                  <h1 className="text-xl font-bold text-white flex-1">Saved Tweets</h1>
-                  <GoProButton onClick={() => setShowPricing(true)} />
+                  <h1 className="text-xl font-bold text-white">Saved Tweets</h1>
                 </div>
               </header>
 
