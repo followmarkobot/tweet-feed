@@ -12,24 +12,24 @@ const freeFeatures = [
   { text: "Latest 30 posts", included: true },
   { text: "Basic search", included: true },
   { text: "Twitter & Facebook views", included: true },
-  { text: "Full archive", included: false },
+  { text: "Unlimited archive", included: false },
   { text: "AI summaries", included: false },
-  { text: "Learning paths", included: false },
-  { text: "Weekly digest", included: false },
-  { text: "Custom collections", included: false },
+  { text: "Collections & tags", included: false },
+  { text: "Export anytime", included: false },
   { text: "Advanced search", included: false },
+  { text: "Priority support", included: false },
 ];
 
 const proFeatures = [
   { text: "Latest 30 posts", included: true },
   { text: "Basic search", included: true },
   { text: "Twitter & Facebook views", included: true },
-  { text: "Full archive", included: true },
+  { text: "Unlimited archive", included: true },
   { text: "AI summaries", included: true },
-  { text: "Learning paths", included: true },
-  { text: "Weekly digest", included: true },
-  { text: "Custom collections", included: true },
+  { text: "Collections & tags", included: true },
+  { text: "Export anytime", included: true },
   { text: "Advanced search", included: true },
+  { text: "Priority support", included: true },
 ];
 
 function CheckIcon({ included, accentColor }: { included: boolean; accentColor: string }) {
