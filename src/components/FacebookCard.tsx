@@ -8,6 +8,7 @@ import { formatRelativeTime, parseTextWithUrls } from "../lib/utils";
 
 interface FacebookCardProps {
   tweet: Tweet;
+  onArticleClick?: (url: string, tweet: Tweet) => void;
 }
 
 function FacebookLinkCard({ card }: { card: Tweet["link_cards"][number] }) {

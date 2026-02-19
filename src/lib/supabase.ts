@@ -46,6 +46,13 @@ export interface Tweet {
   notes: string | null;
   saved_at: string | null;
   created_at: string | null;
+  public_metrics?: {
+    like_count: number;
+    retweet_count: number;
+    reply_count: number;
+    bookmark_count: number;
+    impression_count?: number;
+  };
 }
 
 export interface MediaItem {
