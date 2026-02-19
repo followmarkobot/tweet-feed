@@ -5,9 +5,10 @@ import type { LinkCardData } from "../lib/supabase";
 
 interface LinkCardProps {
   card: LinkCardData;
+  onClick?: (url: string) => void;
 }
 
-export default function LinkCard({ card }: LinkCardProps) {
+export default function LinkCard({ card, onClick }: LinkCardProps) {
   const [imgFailed, setImgFailed] = useState(false);
 
   if (!card.url) return null;
@@ -25,11 +26,19 @@ export default function LinkCard({ card }: LinkCardProps) {
   const headline = hasTitle ? card.title : domain;
   const fallbackText = isTco ? "View article" : "View";
 
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.stopPropagation();
+    if (!onClick) return;
+    event.preventDefault();
+    onClick(card.url);
+  };
+
   return (
     <a
       href={card.url}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className="mt-3 block rounded-2xl border border-[rgb(47,51,54)] overflow-hidden hover:bg-[rgb(30,33,38)] transition-colors"
     >
       {card.image && !imgFailed && (
